@@ -3,3 +3,6 @@ dist/
 .cache/
 coverage/
 umd/
+
+# jscpd duplication-scan output (see .github/workflows/duplication-scan.yaml)
+report/

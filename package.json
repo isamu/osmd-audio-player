@@ -21,7 +21,8 @@
     "build-all": "run-s build build-umd build-demos",
     "netlify-build": "run-s build install-demos build-demos",
     "lint": "eslint src/",
-    "format": "prettier --write src/"
+    "format": "prettier --write src/",
+    "knip": "knip"
   },
   "author": "Jimmy Utterström",
   "license": "MIT",
@@ -56,6 +57,7 @@
     "eslint": "^10.8.0",
     "eslint-config-prettier": "^10.1.8",
     "jsdom": "^29.1.1",
+    "knip": "^6",
     "npm-run-all2": "^8.0.4",
     "prettier": "^3.9.6",
     "rollup": "^4.62.3",

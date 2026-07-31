@@ -30,3 +30,26 @@ jobs:
       - run: yarn lint
       - run: yarn build
       - run: yarn test
+
+  demos-build:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        demo: [basic, vue-player-demo, react-demo]
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false  # no git push; zizmor artipacked
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22.x
+          cache: yarn
+      # Build the library first: each demo depends on it via a file: link (../../),
+      # whose entry (dist/index.js) only exists after the root build runs.
+      - run: yarn install --frozen-lockfile
+      - run: yarn build
+      - run: yarn install --frozen-lockfile
+        working-directory: demos/${{ matrix.demo }}
+      - run: yarn build
+        working-directory: demos/${{ matrix.demo }}

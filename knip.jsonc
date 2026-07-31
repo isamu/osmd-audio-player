@@ -1,0 +1,33 @@
+{
+  "$schema": "https://unpkg.com/knip@6/schema.json",
+  // Entry points of the library:
+  //  - src/index.ts (the public API) is auto-detected by knip as a default entry, so it is not
+  //    listed here (listing it triggers a "redundant entry" hint); package.json "main" points at
+  //    its build output dist/index.js.
+  //  - src/**/*.test.ts are the colocated vitest specs (standalone test entries).
+  //  - rollup.umd.config.js is the entry for the `build-umd` script; listing it lets knip resolve
+  //    the @rollup/plugin-* devDependencies it imports (its non-standard filename is not
+  //    auto-detected by knip's rollup config discovery).
+  "entry": ["src/**/*.test.ts", "rollup.umd.config.js"],
+  // Library source only. demos/ are separate example apps (their own package.json + build), so
+  // scoping the project to src/** keeps knip from ever traversing them (there is no root
+  // "workspaces" field, so no explicit demos ignore is needed — knip flags it as redundant).
+  "project": ["src/**/*.ts"],
+  "ignoreExportsUsedInFile": true,
+  "includeEntryExports": false,
+  "rules": {
+    // Warn mode: every rule is "warn" (reported, exit 0) or "off". Nothing gates CI here.
+    "files": "warn",
+    "dependencies": "warn",
+    "devDependencies": "warn",
+    "unlisted": "warn",
+    "exports": "warn",
+    "types": "warn",
+    "unresolved": "off",
+    "binaries": "off",
+    "nsExports": "off",
+    "nsTypes": "off",
+    "enumMembers": "off",
+    "duplicates": "off",
+  },
+}
